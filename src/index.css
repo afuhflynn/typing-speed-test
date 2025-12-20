@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --neutral-900: hsl(0, 0%, 7%);
+  --neutral-800: hsl(0, 0%, 15%);
+  --neutral-500: hsl(240, 3%, 46%);
+  --neutral-400: hsl(240, 1%, 59%);
+  --neutral-0: hsl(0, 0%, 100%);
+
+  --blue-600: hsl(214, 100%, 55%);
+  --blue-400: hsl(210, 100%, 65%);
+
+  --red-500: hsl(354, 63%, 57%);
+  --green-500: hsl(140, 63%, 57%);
+  --yellow-400: hsl(49, 85%, 70%);
+
+  /* semantic overrides for dark mode */
+  --background: var(--neutral-900); /* page bg (dark) */
+  --foreground: var(--neutral-0); /* primary text (light) */
+  --card: var(--neutral-800); /* slightly lighter than page bg */
+  --card-foreground: var(--neutral-0);
+
+  --popover: var(--neutral-800);
+  --popover-foreground: var(--neutral-0);
+
+  --primary: var(--blue-600);
+  --primary-foreground: var(--neutral-0);
+
+  --secondary: var(--neutral-400); /* lighter grey for accents on dark */
+  --secondary-foreground: var(--neutral-900);
+
+  --muted: var(--neutral-500);
+  --muted-foreground: var(--neutral-0);
+
+  --accent: var(--blue-400);
+  --accent-foreground: var(--neutral-0);
+
+  --destructive: var(--red-500);
+  --destructive-foreground: var(--neutral-0);
+
+  --border: var(--neutral-800);
+  --input: var(--neutral-800);
+  --ring: var(--blue-600);
+
+  --chart-1: var(--blue-600);
+  --chart-2: var(--blue-400);
+  --chart-3: var(--green-500);
+  --chart-4: var(--yellow-400);
+  --chart-5: var(--red-500);
+
+  --sidebar: var(--neutral-800);
+  --sidebar-foreground: var(--neutral-0);
+  --sidebar-primary: var(--blue-600);
+  --sidebar-primary-foreground: var(--neutral-0);
+  --sidebar-accent: var(--blue-400);
+  --sidebar-accent-foreground: var(--neutral-0);
+  --sidebar-border: var(--neutral-800);
+  --sidebar-ring: var(--blue-600);
+
+  /* keep fonts / radii / shadows the same */
+  --font-sans: "Sora", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-size-base: 16px;
+  --radius: 1.3rem;
+  --shadow-color: rgba(29, 161, 242, 0.25);
+}
+
+/* --- Theme mapping used by Tailwind / components (preserves your @theme inline usage) --- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  h5 {
+    @apply text-lg;
+  }
+
+  h6 {
+    @apply text-base;
+  }
+
+  p {
+    @apply text-base;
+  }
+
+  a {
+    @apply text-primary underline;
+  }
+
+  code {
+    @apply font-mono text-sm;
+  }
+
+  pre {
+    @apply bg-muted p-4 rounded;
+  }
+
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    @apply appearance-none;
+  }
+}

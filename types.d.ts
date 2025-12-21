@@ -13,6 +13,8 @@ interface TestState {
   difficulty: Difficulty;
 }
 
+type TypingState = "TYPING" | "PAUSED" | "NEW";
+
 interface Timer {
   h?: number; // hours
   m: number; // minutes
@@ -38,6 +40,8 @@ interface StoreState {
   test: TestState;
   settings: SettingsState;
   personalBest: PersonalBestState;
+  typingState: TypingState;
+  setTypingState: (typingState: TypingState) => void;
   results: ResultsState;
   setDifficulty: (difficulty: Difficulty) => void;
   setMode: (mode: Mode) => void;

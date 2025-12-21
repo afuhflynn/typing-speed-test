@@ -30,6 +30,10 @@ export const useTypingStore = create<StoreState>()(
         accuracy: 0,
         chars: 0,
       },
+      typingState: "NEW",
+      setTypingState(typingState) {
+        set({ typingState });
+      },
       setDifficulty(difficulty) {
         const { test } = get();
         set({

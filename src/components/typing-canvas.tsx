@@ -1,0 +1,34 @@
+import { Overlay } from "./home/overlay";
+
+export const TypingCanvas = () => {
+  return (
+    <div className=" relative w-full h-full">
+      <Overlay />
+      <span className={`text-neutral-400 text-5xl`}>
+        {" "}
+        The archaeological expedition unearthed artifacts that complicated
+        prevailing theories about Bronze Age trade networks. Obsidian from
+        Anatolia, lapis lazuli from Afghanistan, and amber from the Baltic—all
+        discovered in a single Mycenaean tomb—suggested commercial connections
+        far more extensive than previously hypothesized. "We've underestimated
+        ancient peoples' navigational capabilities and their appetite for luxury
+        goods," the lead researcher observed. "Globalization isn't as modern as
+        we assume." The archaeological expedition unearthed artifacts that
+        complicated prevailing theories about Bronze Age trade networks.
+        Obsidian from Anatolia, lapis lazuli from Afghanistan, and amber from
+        the Baltic—all discovered in a single Mycenaean tomb—suggested
+        commercial connections far more extensive than previously hypothesized.
+        "We've underestimated ancient peoples' navigational capabilities and
+        their appetite for luxury goods," the lead researcher observed.
+        "Globalization isn't as modern as we assume." The archaeological
+        expedition unearthed artifacts that complicated prevailing theories
+        about Bronze Age trade networks. Obsidian from Anatolia, lapis lazuli
+        from Afghanistan, and amber from the Baltic—all discovered in a single
+        Mycenaean tomb—suggested commercial connections far more extensive than
+        previously hypothesized. "We've underestimated ancient peoples'
+        navigational capabilities and their appetite for luxury goods," the lead
+        researcher observed. "Globalization isn't as modern as we assume."
+      </span>
+    </div>
+  );
+};

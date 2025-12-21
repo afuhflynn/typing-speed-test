@@ -8,6 +8,7 @@ export const useDropdownRef = (
     const handleClick = (e: PointerEvent) => {
       if (ref && ref.current) {
         if (ref.current.contains(e.target)) {
+          // TODO: Fix this ts error
           callback();
         }
       }

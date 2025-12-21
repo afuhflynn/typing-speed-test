@@ -1,6 +1,27 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Sora";
+  src: url("./assets/fonts/Sora/static/Sora-Regular.ttf") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora-Bold";
+  src: url("./assets/fonts/Sora/static/Sora-Bold.ttf") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora-SemiBold";
+  src: url("./assets/fonts/Sora/static/Sora-SemiBold.ttf") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --neutral-900: hsl(0, 0%, 7%);
   --neutral-800: hsl(0, 0%, 15%);
@@ -27,7 +48,7 @@
   --primary: var(--blue-600);
   --primary-foreground: var(--neutral-0);
 
-  --secondary: var(--neutral-400); /* lighter grey for accents on dark */
+  --secondary: var(--neutral-800); /* lighter grey for accents on dark */
   --secondary-foreground: var(--neutral-900);
 
   --muted: var(--neutral-500);
@@ -59,8 +80,12 @@
   --sidebar-ring: var(--blue-600);
 
   /* keep fonts / radii / shadows the same */
-  --font-sans: "Sora", system-ui, -apple-system, "Segoe UI", Roboto,
+  --font-sora: "Sora", system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  --font-sora-bold: "Sora-Bold", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-sora-semibold: "Sora-SemiBold", system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-size-base: 16px;
   --radius: 1.3rem;
   --shadow-color: rgba(29, 161, 242, 0.25);
@@ -86,6 +111,7 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
+  --color-neutral-0: var(--neutral-0);
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -121,14 +147,19 @@
 }
 
 @layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   html {
-    font-family: var(--font-sans);
+    font-family: var(--font-sora);
     font-size: var(--font-size-base);
     line-height: 1.5;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground  h-screen w-screen;
   }
 
   h1,
@@ -153,7 +184,7 @@
   }
 
   h4 {
-    @apply text-xl;
+    @apply text-xl font-medium;
   }
 
   h5 {
@@ -183,5 +214,13 @@
   ::-webkit-inner-spin-button,
   ::-webkit-outer-spin-button {
     @apply appearance-none;
+  }
+
+  .padding {
+    @apply lg:px-28 md:px-8 md:py-8 p-4;
+  }
+
+  button {
+    @apply cursor-pointer outline-none;
   }
 }

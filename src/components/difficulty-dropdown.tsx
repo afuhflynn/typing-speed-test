@@ -8,7 +8,7 @@ export const DifficultyDropdown = () => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useDropdownRef(dropdownRef, () => setOpen(false));
-  const { test, setDifficulty } = useTypingStore();
+  const { test, setDifficulty, typingState } = useTypingStore();
   const { difficulty } = test;
   const isMobile = useIsMobile();
 
@@ -16,6 +16,7 @@ export const DifficultyDropdown = () => {
     return (
       <button
         className="border-neutral-500 capitalize py-1.5 px-2.5 rounded-[10px] border-2 font-semibold cursor-pointer flex items-center justify-center gap-4"
+        disabled={typingState === "TYPING"}
         onClick={() => setOpen((prev) => !prev)}
       >
         <span className="capitalize text-xl font-light">
@@ -63,6 +64,7 @@ export const DifficultyDropdown = () => {
           <button
             key={`${item.id}-${index}`}
             onClick={() => setDifficulty(item.id as Difficulty)}
+            disabled={typingState === "TYPING"}
             className={`capitalize border-neutral-500 py-1.5 px-2.5 rounded-[10px] border-2 hover:text-blue-400 hover:border-blue-400 transition-colors duration-75 ${
               item.id === difficulty ? "text-blue-400 border-blue-400!" : ""
             }`}

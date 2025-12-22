@@ -8,7 +8,7 @@ export const ModeDropdown = () => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   useDropdownRef(dropdownRef, () => setOpen(false));
-  const { test, setMode } = useTypingStore();
+  const { test, setMode, typingState } = useTypingStore();
   const { mode } = test;
   const isMobile = useIsMobile();
   if (isMobile) {
@@ -16,6 +16,7 @@ export const ModeDropdown = () => {
       <button
         className="border-neutral-500 capitalize py-1.5 px-2.5 rounded-[10px] border-2 font-semibold cursor-pointer flex items-center justify-center gap-4"
         onClick={() => setOpen((prev) => !prev)}
+        disabled={typingState === "TYPING"}
       >
         <span className="capitalize text-xl font-light">
           {mode.toLowerCase()}
@@ -60,6 +61,7 @@ export const ModeDropdown = () => {
           <button
             key={`${item.id}-${index}`}
             onClick={() => setMode(item.id as Mode)}
+            disabled={typingState === "TYPING"}
             className={`capitalize border-neutral-500 py-1.5 px-2.5 rounded-[10px] border-2 hover:text-blue-400 hover:border-blue-400 transition-colors duration-75 ${
               item.id === mode ? "text-blue-400 border-blue-400!" : ""
             }`}

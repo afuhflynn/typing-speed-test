@@ -44,6 +44,24 @@ export const useTypingStore = create<StoreState>()(
           },
         });
       },
+      setText(text) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            text,
+          },
+        });
+      },
+      setInput(input) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            input,
+          },
+        });
+      },
       typingState: "NEW",
 
       setTypingState(typingState) {
@@ -73,7 +91,7 @@ export const useTypingStore = create<StoreState>()(
     {
       name: "typing-speed-test",
       partialize: (state) => {
-        const { settings, personalBest, results } = state;
+        const { settings, personalBest, results, typingState } = state;
         return { settings, personalBest, results };
       },
     }

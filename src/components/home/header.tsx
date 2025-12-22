@@ -1,8 +1,7 @@
 import { useTypingStore } from "../../zustand";
 
 export const Header = () => {
-  const { test } = useTypingStore();
-  const { wpm } = test;
+  const { personalBest } = useTypingStore();
   return (
     <header className="w-full h-[39.18px] flex items-center justify-between">
       <>
@@ -24,7 +23,7 @@ export const Header = () => {
             <span className="hidden md:flex">Personal best:</span>{" "}
             <span className="flex md:hidden">Best:</span>{" "}
           </span>
-          <span className="text-xl">{wpm} WPM</span>
+          <span className="text-xl">{personalBest?.wpm} WPM</span>
         </div>
       </div>
     </header>

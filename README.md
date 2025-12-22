@@ -73,7 +73,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Author
 
-- Website - [Add your name here](https://github.com/afuhflynn)
+- Website - [Afuh Flynn Tembeng](https://github.com/afuhflynn)
 - Frontend Mentor - [@afuhflynn](https://www.frontendmentor.io/profile/afuhflynn)
 - Twitter - [@afuhflynn](https://www.twitter.com/afuhflynn)
 

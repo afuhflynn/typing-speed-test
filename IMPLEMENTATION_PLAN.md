@@ -6,7 +6,7 @@ This plan outlines the steps to complete the Frontend Mentor Typing Speed Test c
 ## Prerequisites
 - Node.js and pnpm installed
 - Basic knowledge of React, TypeScript, and TailwindCSS
-- Familiarity with the challenge requirements in MAIN_README.md
+- Familiarity with the challenge requirements in CHALLENGE_README.md
 
 ## Step-by-Step Implementation
 

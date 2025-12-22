@@ -45,4 +45,5 @@ interface StoreState {
   results: ResultsState;
   setDifficulty: (difficulty: Difficulty) => void;
   setMode: (mode: Mode) => void;
+  setTimerValue: (key: string, value: number) => void;
 }

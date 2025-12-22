@@ -1,60 +1,68 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
-export const useTypingStore = create<StoreState>()(
-  persist(
-    (set, get) => ({
+export const useTypingStore = create<StoreState>()((set, get) => ({
+  test: {
+    text: "",
+    input: "",
+    timer: {
+      m: 0,
+      s: 0,
+    },
+    wpm: 0,
+    accuracy: 0,
+    errors: 0,
+    chars: 0,
+    mode: "TIMED",
+    difficulty: "HARD",
+  },
+  settings: {
+    mode: "TIMED",
+    difficulty: "HARD",
+  },
+  personalBest: {
+    wpm: 0,
+  },
+  results: {
+    wpm: 0,
+    accuracy: 0,
+    chars: 0,
+  },
+
+  setTimerValue(key, value) {
+    const { test } = get();
+    set({
       test: {
-        text: "",
-        input: "",
+        ...test,
         timer: {
-          m: 0,
-          s: 60,
+          ...test.timer,
+          [key]: value,
         },
-        wpm: 0,
-        accuracy: 0,
-        errors: 0,
-        chars: 0,
-        mode: "TIMED",
-        difficulty: "HARD",
       },
-      settings: {
-        mode: "TIMED",
-        difficulty: "HARD",
+    });
+  },
+  typingState: "NEW",
+
+  setTypingState(typingState) {
+    set({ typingState });
+  },
+
+  setDifficulty(difficulty) {
+    const { test } = get();
+    set({
+      test: {
+        ...test,
+        difficulty,
       },
-      personalBest: {
-        wpm: 0,
+    });
+  },
+
+  setMode(mode) {
+    const { test } = get();
+    set({
+      test: {
+        ...test,
+        mode,
       },
-      results: {
-        wpm: 0,
-        accuracy: 0,
-        chars: 0,
-      },
-      typingState: "NEW",
-      setTypingState(typingState) {
-        set({ typingState });
-      },
-      setDifficulty(difficulty) {
-        const { test } = get();
-        set({
-          test: {
-            ...test,
-            difficulty,
-          },
-        });
-      },
-      setMode(mode) {
-        const { test } = get();
-        set({
-          test: {
-            ...test,
-            mode,
-          },
-        });
-      },
-    }),
-    {
-      name: "typing-speed-test",
-    }
-  )
-);
+    });
+  },
+}));

@@ -4,7 +4,7 @@ import { ModeDropdown } from "../mode-dropdown";
 import { RenderTimer } from "../render-timer";
 
 export const HomeUtils = () => {
-  const { test } = useTypingStore();
+  const { test, typingState } = useTypingStore();
   const { wpm, accuracy, timer } = test;
   return (
     <section className="w-full flex lg:items-center lg:justify-between flex-col lg:flex-row gap-6 lg:gap-0 border border-x-0 border-t-0 border-b-border pb-8">
@@ -18,7 +18,13 @@ export const HomeUtils = () => {
         <div className="px-6 first:pl-0 last:pr-0 border border-y-0  border-x-border first:border-l-0 last:border-r-0">
           <h2 className="flex flex-col md:flex-row items-center md:gap-4 gap-3 text-2xl! md:text-3xl!">
             <span className="text-neutral-500">Accuracy: </span>
-            <span className="font-extrabold">{accuracy}%</span>
+            <span
+              className={`font-extrabold ${
+                typingState === "TYPING" ? "text-red-500" : ""
+              }`}
+            >
+              {accuracy}%
+            </span>
           </h2>
         </div>
         <div className="px-6 first:pl-0 last:pr-0 border border-y-0  border-x-border first:border-l-0 last:border-r-0">

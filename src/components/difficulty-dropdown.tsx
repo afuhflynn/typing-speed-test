@@ -14,7 +14,7 @@ export const DifficultyDropdown = () => {
 
   if (isMobile) {
     return (
-      <div
+      <button
         className="border-neutral-500 capitalize py-1.5 px-2.5 rounded-[10px] border-2 font-semibold cursor-pointer flex items-center justify-center gap-4"
         onClick={() => setOpen((prev) => !prev)}
       >
@@ -31,14 +31,14 @@ export const DifficultyDropdown = () => {
 
         {open && (
           <div
-            className="rounded-[8px] absolute bg-neutral-800 w-[166.5px] flex flex-col items-start top-13 shadow-xl"
+            className="rounded-[8px] absolute bg-neutral-800 w-[166.5px] flex flex-col items-start top-13 shadow-xl z-30"
             ref={dropdownRef}
           >
             {difficultyies.map((item, index) => (
               <button
                 key={`${item.id}-${index}`}
                 onClick={() => setDifficulty(item.id as Difficulty)}
-                className={`capitalize p-4 flex items-center gap-3 font-light`}
+                className={`capitalize p-4 flex items-center gap-3 font-light border-2 w-full border-b-neutral-500 border-x-0 last:border-b-0 border-t-0 hover:bg-neutral-700/60 transition-colors duration-100`}
               >
                 <span
                   className={`rounded-full size-5 border border-neutral-0 ${
@@ -52,7 +52,7 @@ export const DifficultyDropdown = () => {
             ))}
           </div>
         )}
-      </div>
+      </button>
     );
   }
   return (
@@ -63,7 +63,7 @@ export const DifficultyDropdown = () => {
           <button
             key={`${item.id}-${index}`}
             onClick={() => setDifficulty(item.id as Difficulty)}
-            className={`capitalize border-neutral-500 py-1.5 px-2.5 rounded-[10px] border-2 ${
+            className={`capitalize border-neutral-500 py-1.5 px-2.5 rounded-[10px] border-2 hover:text-blue-400 hover:border-blue-400 transition-colors duration-75 ${
               item.id === difficulty ? "text-blue-400 border-blue-400!" : ""
             }`}
           >

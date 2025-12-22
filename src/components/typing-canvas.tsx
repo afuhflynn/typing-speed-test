@@ -4,7 +4,7 @@ export const TypingCanvas = () => {
   return (
     <div className=" relative w-full h-full">
       <Overlay />
-      <span className={`text-neutral-400 text-5xl`}>
+      <span className={`text-neutral-400 lg:text-4xl md:text-3xl text-xl`}>
         {" "}
         The archaeological expedition unearthed artifacts that complicated
         prevailing theories about Bronze Age trade networks. Obsidian from

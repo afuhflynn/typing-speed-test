@@ -4,7 +4,7 @@ import { TypingCanvas } from "../components/typing-canvas";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col h-full w-full padding gap-10">
+    <div className="flex flex-col h-full w-full padding gap-10 overflow-x-hidden">
       <div className="w-full flex flex-col gap-16">
         <Header />
         <HomeUtils />

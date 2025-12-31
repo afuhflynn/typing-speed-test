@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useTypingStore } from "../zustand";
 
 export const RenderTimer = ({ timer }: { timer: Timer }) => {
-  const [startTime, setStartTime] = useState(0);
+  const startTimeRef = useRef<number>(0);
   const {
     typingState,
     setTimerValue,
@@ -16,46 +16,72 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
   const { input, text } = test;
 
   const calculateAccuracy = useCallback(() => {
-    let errorCount = 0;
+    if (input.length === 0) {
+      return { errorCount: 0, accuracy: 0, correctChars: 0 };
+    }
 
-    for (let i = 0; i < input.length; i++) {
+    let errorCount = 0;
+    const charsToCheck = Math.min(input.length, text.length);
+
+    for (let i = 0; i < charsToCheck; i++) {
       if (input[i] !== text[i]) errorCount++;
     }
 
-    const correctChars = text.length - errorCount; // get total number of correct chars from the total
-    const accuracy = Math.round(correctChars / text.length / 100); // calculate percentage accuracy
+    const correctChars = charsToCheck - errorCount;
+    // Calculate accuracy based on characters typed so far
+    const accuracy = Math.round((correctChars / charsToCheck) * 100);
 
     return { errorCount, accuracy, correctChars };
   }, [input, text]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (typingState !== "TYPING") return;
-      setStartTime(Date.now());
-      if (s < 60) {
+    const timerInterval = setTimeout(() => {
+      if (typingState !== "TYPING") {
+        startTimeRef.current = 0;
+        return;
+      }
+
+      // Set start time on first tick when typing
+      if (startTimeRef.current === 0) {
+        startTimeRef.current = Date.now();
+      }
+
+      if (s < 59) {
         setTimerValue("s", s + 1);
+
+        // Calculate accuracy every second
         const { errorCount, accuracy, correctChars } = calculateAccuracy();
         setAccuracyValue(accuracy);
         setErrorsValue(errorCount);
         setCharsValue(correctChars);
-      }
-      if (s === 60) {
-        setTimerValue("s", 0);
-        setTimerValue("m", m + 1);
 
-        // calculate wpm
-        const endTime = Date.now(); // get current time
-        // calculate time taken
-        const timeTaken = endTime - startTime;
-        const wpm = Math.round(input.split(" ").length / timeTaken); // caculate words per minute
-        setWPMValue(wpm);
-      }
-      if (m === 60 && s == 60) {
+        // Calculate WPM every second if we have a start time
+        if (startTimeRef.current > 0 && input.length > 0) {
+          const currentTime = Date.now();
+          const timeTakenInMinutes =
+            (currentTime - startTimeRef.current) / 60000;
+          const wordCount = input
+            .trim()
+            .split(/\s+/)
+            .filter((word) => word.length > 0).length;
+          const wpm =
+            timeTakenInMinutes > 0
+              ? Math.round(wordCount / timeTakenInMinutes)
+              : 0;
+          setWPMValue(wpm);
+        }
+      } else if (s === 59) {
         setTimerValue("s", 0);
         setTimerValue("m", m + 1);
-        setTimerValue("h", h ?? 0 + 1);
       }
-      if (m === 60 && s == 60 && h === 24) {
+
+      if (m === 59 && s === 59) {
+        setTimerValue("s", 0);
+        setTimerValue("m", 0);
+        setTimerValue("h", (h ?? 0) + 1);
+      }
+
+      if (h === 23 && m === 59 && s === 59) {
         setTimerValue("s", 0);
         setTimerValue("m", 0);
         setTimerValue("h", 0);
@@ -63,22 +89,22 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     }, 1000);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timerInterval);
     };
   }, [
     typingState,
     s,
-    setTimerValue,
-    h,
     m,
+    h,
+    setTimerValue,
     input,
     setWPMValue,
-    startTime,
     calculateAccuracy,
     setAccuracyValue,
     setCharsValue,
     setErrorsValue,
   ]);
+
   if (h) {
     return (
       <span
@@ -90,6 +116,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
       </span>
     );
   }
+
   return (
     <span
       className={`flex items-center font-extrabold ${

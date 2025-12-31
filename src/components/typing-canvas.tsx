@@ -60,14 +60,14 @@ export const TypingCanvas = () => {
       {text && text.trim() && <Overlay />}
 
       <span
-        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-14 transition-all duration-100`}
+        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100`}
       >
         <RenderChars input={input} text={text} />
       </span>
       <textarea
         ref={inputRef}
         spellCheck={false}
-        className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent caret-neutral-500 lg:text-5xl md:text-3xl md::text-[40px] text-[32px]"
+        className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent caret-neutral-500 lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100"
         autoFocus
         value={input}
         onChange={(e) => setInput(e.target.value)}

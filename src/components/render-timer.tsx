@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useTypingStore } from "../zustand";
+import { useNavigate } from "react-router-dom";
 
 export const RenderTimer = ({ timer }: { timer: Timer }) => {
   // Stores the timestamp when typing starts (used for WPM)
   const startTimeRef = useRef<number>(0);
+  const navigate = useNavigate();
 
   // Zustand state and setters
   const {
@@ -20,7 +22,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
   const { m, h, s } = timer;
 
   // Typing input and reference text
-  const { input, text } = test;
+  const { input, text, mode } = test;
 
   // Calculates accuracy, error count, and correct characters
   const calculateAccuracy = useCallback(() => {
@@ -41,12 +43,24 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     return { errorCount, accuracy, correctChars };
   }, [input, text]);
 
+  const handleNavigate = useCallback(
+    (route: string = "/result") => {
+      navigate(route);
+    },
+    [navigate]
+  );
+
   useEffect(() => {
     // Run timer logic every second
     const timerInterval = setTimeout(() => {
       // Stop timer logic if not typing
       if (typingState !== "TYPING") {
         startTimeRef.current = 0;
+        return;
+      }
+
+      // mode based timer implementation
+      if (mode === "PASSAGE" && input.trim() === "") {
         return;
       }
 
@@ -57,6 +71,12 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
 
       if (s < 59) {
         setTimerValue("s", s + 1);
+        // check typing states and end the process
+        if (mode === "PASSAGE") {
+          if (input.trim().length >= text.trim().length) {
+            handleNavigate();
+          }
+        }
 
         // Update accuracy-related stats
         const { errorCount, accuracy, correctChars } = calculateAccuracy();
@@ -84,6 +104,8 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
           setWPMValue(wpm);
         }
       } else if (s === 59) {
+        if (mode === "TIMED") handleNavigate();
+
         // Seconds → minutes rollover
         setTimerValue("s", 0);
         setTimerValue("m", m + 1);
@@ -119,6 +141,10 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     setAccuracyValue,
     setCharsValue,
     setErrorsValue,
+    mode,
+    navigate,
+    text,
+    handleNavigate,
   ]);
 
   // Render hh:mm:ss if hours exist

@@ -26,7 +26,9 @@ export const TypingCanvas = () => {
   return (
     <div className="relative w-full lg:h-135 md:h-162 h-109.5">
       {text && text.trim() && <Overlay />}
-      <span className={`text-neutral-500 lg:text-5xl md:text-3xl text-xl`}>
+      <span
+        className={`text-neutral-500 lg:text-5xl md:text-3xl md::text-[40px] text-[32px]`}
+      >
         {text}
       </span>
     </div>

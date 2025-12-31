@@ -200,7 +200,7 @@
   }
 
   a {
-    @apply text-primary underline;
+    @apply text-primary;
   }
 
   code {

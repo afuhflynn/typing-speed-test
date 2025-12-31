@@ -97,11 +97,14 @@ export const useTypingStore = create<StoreState>()(
           },
         });
       },
+
+      restartTyping() {},
     }),
     {
       name: "typing-speed-test",
       partialize: (state) => {
         const { settings, personalBest, results, typingState } = state;
+        console.log({ typingState });
         return { settings, personalBest, results };
       },
     }

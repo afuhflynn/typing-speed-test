@@ -50,4 +50,5 @@ interface StoreState {
   setText: (text: string) => void;
   setInput: (input: string) => void;
   setPrevWords: (value: string) => void;
+  restartTyping: () => void;
 }

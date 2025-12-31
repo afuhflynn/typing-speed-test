@@ -63,6 +63,33 @@ export const useTypingStore = create<StoreState>()(
           },
         });
       },
+      setAccuracyValue(value) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            accuracy: value,
+          },
+        });
+      },
+      setCharsValue(value) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            chars: value,
+          },
+        });
+      },
+      setErrorsValue(value) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            errors: value,
+          },
+        });
+      },
       setText(text) {
         const { test } = get();
         set({

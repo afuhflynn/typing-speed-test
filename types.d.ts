@@ -52,4 +52,7 @@ interface StoreState {
   setPrevWords: (value: string) => void;
   restartTyping: () => void;
   setWPMValue: (value: number) => void;
+  setAccuracyValue: (value: number) => void;
+  setCharsValue: (value: number) => void;
+  setErrorsValue: (value: number) => void;
 }

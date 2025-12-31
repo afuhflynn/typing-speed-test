@@ -106,6 +106,7 @@ export const useTypingStore = create<StoreState>()(
           set({
             test: {
               ...test,
+              input,
             },
           });
           return;
@@ -113,7 +114,6 @@ export const useTypingStore = create<StoreState>()(
         set({
           test: {
             ...test,
-            input,
           },
         });
       },

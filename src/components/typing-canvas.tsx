@@ -13,7 +13,7 @@ const RenderChars = ({ input, text }: { input: string; text: string }) => {
         if (input[i] && input[i].trim() !== "") {
           // Character has been typed
           if (text[i] !== input[i]) {
-            colorClass = "text-red-500"; // Wrong character
+            colorClass = "text-red-500 underline"; // Wrong character
           } else {
             colorClass = "text-green-500"; // Correct character
           }

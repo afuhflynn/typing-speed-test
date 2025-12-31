@@ -10,7 +10,7 @@ const HomePage = () => {
         <Header />
         <AppUtils />
       </section>
-      <section className="w-full flex flex-col lg:gap-16 md:gap-10 gap-8">
+      <section className="w-full flex flex-col lg:gap-16 md:gap-10 gap-8 flex-1">
         <TypingCanvas />
         <FooterSection />
       </section>

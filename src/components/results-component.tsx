@@ -7,7 +7,7 @@ interface props {
 
 export const ResultsComponenet = ({ status }: props) => {
   const { test } = useTypingStore();
-  const { wpm, accuracy, chars } = test;
+  const { wpm, accuracy, chars, errors } = test;
   return (
     <div className="flex flex-col items-center w-full md:gap-12 gap-10 relative flex-1">
       {status !== "NEW_PERSONAL_BEST" ? (
@@ -39,21 +39,21 @@ export const ResultsComponenet = ({ status }: props) => {
         <div className="border rounded-[8px] p-6 border-neutral-700 md:w-1/3! lg:w-70! w-full!">
           <h2 className="flex flex-col items-start gap-3 text-3xl! font-light!">
             <span className="text-neutral-500">WPM: </span>
-            <span className="font-extrabold">{85}</span>
+            <span className="font-extrabold">{wpm}</span>
           </h2>
         </div>
         <div className="border rounded-[8px] p-6 border-neutral-700 md:w-1/3! lg:w-70! w-full!">
           <h2 className="flex flex-col items-start gap-3 text-3xl! font-light!">
             <span className="text-neutral-500">Accuracy: </span>
-            <span className={`font-extrabold text-red-500`}>{90}%</span>
+            <span className={`font-extrabold text-red-500`}>{accuracy}%</span>
           </h2>
         </div>
         <div className="border rounded-[8px] p-6 border-neutral-700 md:w-1/3! lg:w-70! w-full!">
           <h2 className="flex flex-col items-start gap-3 text-3xl! text-neutral-500 font-light!">
             <span className="">Characters </span>
             <span className="flex items-center">
-              <span className={`font-extrabold text-green-500`}>{120}</span> /{" "}
-              <span className={`font-extrabold text-red-500`}>5</span>
+              <span className={`font-extrabold text-green-500`}>{chars}</span> /{" "}
+              <span className={`font-extrabold text-red-500`}>{errors}</span>
             </span>
           </h2>
         </div>

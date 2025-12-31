@@ -7,6 +7,7 @@ export const useTypingStore = create<StoreState>()(
       test: {
         text: "",
         input: "",
+        prevWords: "",
 
         timer: {
           m: 0,
@@ -30,6 +31,15 @@ export const useTypingStore = create<StoreState>()(
         wpm: 0,
         accuracy: 0,
         chars: 0,
+      },
+      setPrevWords(value) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            prevWords: value,
+          },
+        });
       },
 
       setTimerValue(key, value) {

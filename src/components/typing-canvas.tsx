@@ -24,7 +24,7 @@ export const TypingCanvas = () => {
   }, [setText, difficulty]);
 
   return (
-    <div className=" relative w-full h-full">
+    <div className="relative w-full lg:h-135 md:h-162 h-109.5">
       {text && text.trim() && <Overlay />}
       <span className={`text-neutral-500 lg:text-5xl md:text-3xl text-xl`}>
         {text}

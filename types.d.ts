@@ -11,6 +11,7 @@ interface TestState {
   chars: number;
   mode: Mode;
   difficulty: Difficulty;
+  prevWords: string;
 }
 
 type TypingState = "TYPING" | "PAUSED" | "NEW";
@@ -48,4 +49,5 @@ interface StoreState {
   setTimerValue: (key: string, value: number) => void;
   setText: (text: string) => void;
   setInput: (input: string) => void;
+  setPrevWords: (value: string) => void;
 }

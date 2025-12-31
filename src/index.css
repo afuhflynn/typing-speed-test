@@ -224,3 +224,18 @@
     @apply cursor-pointer outline-none;
   }
 }
+
+/* small caret style for the visible caret */
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: currentColor;
+  vertical-align: bottom;
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}

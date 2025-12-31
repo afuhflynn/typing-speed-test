@@ -3,7 +3,7 @@ import { DifficultyDropdown } from "../difficulty-dropdown";
 import { ModeDropdown } from "../mode-dropdown";
 import { RenderTimer } from "../render-timer";
 
-export const HomeUtils = () => {
+export const AppUtils = () => {
   const { test, typingState } = useTypingStore();
   const { wpm, accuracy, timer } = test;
   return (

@@ -11,6 +11,8 @@ interface TestState {
   chars: number;
   mode: Mode;
   difficulty: Difficulty;
+  isFirst: boolean;
+  isNewPersonalBest: boolean;
 }
 
 type TypingState = "TYPING" | "PAUSED" | "NEW" | "COMPLETE";
@@ -41,4 +43,6 @@ interface StoreState {
   setCharsValue: (value: number) => void;
   setErrorsValue: (value: number) => void;
   resetTest: () => void;
+  setPersonalBest: (value: number) => void;
+  setTestFlags: (isFirst?: boolean, isNewPersonalBest?: boolean) => void;
 }

@@ -1,44 +1,52 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+const initialTestState = {
+  text: "",
+  input: "",
+
+  timer: {
+    m: 0,
+    s: 0,
+  },
+  wpm: 0,
+  accuracy: 0,
+  errors: 0,
+  chars: 0,
+  mode: "TIMED",
+  difficulty: "HARD",
+  isFirst: false,
+  isNewPersonalBest: false,
+} as TestState;
+
 export const useTypingStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      test: {
-        text: "",
-        input: "",
-
-        timer: {
-          m: 0,
-          s: 0,
-        },
-        wpm: 0,
-        accuracy: 0,
-        errors: 0,
-        chars: 0,
-        mode: "TIMED",
-        difficulty: "HARD",
-      },
+      test: initialTestState,
 
       personalBest: {
         wpm: 0,
       },
-      resetTest() {
+      setPersonalBest(value) {
+        set({
+          personalBest: {
+            wpm: value,
+          },
+        });
+      },
+      setTestFlags(isFirst, isNewPersonalBest) {
+        const { test } = get();
         set({
           test: {
-            input: "",
-            timer: {
-              m: 0,
-              s: 0,
-            },
-            wpm: 0,
-            accuracy: 0,
-            errors: 0,
-            chars: 0,
-            mode: "TIMED",
-            difficulty: "HARD",
-            text: "",
+            ...test,
+            isFirst: isFirst as boolean,
+            isNewPersonalBest: isNewPersonalBest as boolean,
           },
+        });
+      },
+      resetTest() {
+        set({
+          test: initialTestState,
         });
       },
 
@@ -169,8 +177,8 @@ export const useTypingStore = create<StoreState>()(
       partialize: (state) => {
         // @ts-expect-error: I don't want to do anything with this valud
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { settings, personalBest, results, typingState } = state;
-        return { settings, personalBest, results };
+        const { settings, personalBest, results, typingState, test } = state;
+        return { personalBest, test };
       },
     }
   )

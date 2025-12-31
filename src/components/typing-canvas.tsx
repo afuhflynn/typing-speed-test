@@ -5,23 +5,29 @@ import { useEffect, useRef } from "react";
 import { generateRandomIndex } from "../utils";
 
 const RenderChars = ({ input, text }: { input: string; text: string }) => {
+  const caretIndex = input.length;
+
   return (
     <>
       {text.split("").map((char, i) => {
-        let colorClass = "text-neutral-500"; // Default: not typed yet
+        let className = "text-neutral-500 relative";
 
-        if (input[i] && input[i].trim() !== "") {
-          // Character has been typed
-          if (text[i] !== input[i]) {
-            colorClass = "text-red-500 underline"; // Wrong character
+        if (input[i]) {
+          if (input[i] !== char) {
+            className = "text-red-500 underline";
           } else {
-            colorClass = "text-green-500"; // Correct character
+            className = "text-green-500";
           }
         }
 
+        const showCaret = i === caretIndex && !input[i];
+
         return (
-          <span key={i} className={colorClass}>
-            {input[i] ? input[i] : char}
+          <span
+            key={i}
+            className={`${className} ${showCaret ? "caret-highlight" : ""}`}
+          >
+            {char}
           </span>
         );
       })}
@@ -67,7 +73,7 @@ export const TypingCanvas = () => {
       <textarea
         ref={inputRef}
         spellCheck={false}
-        className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent caret-neutral-500 lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100"
+        className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 caret-transparent"
         autoFocus
         value={input}
         onChange={(e) => setInput(e.target.value)}

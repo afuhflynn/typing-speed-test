@@ -51,7 +51,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     (route: string = "/result") => {
       if (!personalBest.wpm) {
         setTestFlags(true);
-        setPersonalBest(0);
+        setPersonalBest(wpm);
       } else if (personalBest.wpm < wpm) {
         setTestFlags(false, true);
         setPersonalBest(wpm);

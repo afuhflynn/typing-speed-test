@@ -88,7 +88,7 @@ export const ResultsComponenet = ({ status }: props) => {
       <img
         src="/images/pattern-confetti.svg"
         alt="Confetti Pattern Icon"
-        className={`fixed bottom-0 self-center w-full object-fill ${
+        className={`fixed bottom-0 self-center w-full -z-10 md:h-auto h-56 object-fill ${
           status === "NEW_PERSONAL_BEST" ? "" : "hidden"
         }`}
       />

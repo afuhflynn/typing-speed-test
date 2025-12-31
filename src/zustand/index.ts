@@ -54,6 +54,15 @@ export const useTypingStore = create<StoreState>()(
           },
         });
       },
+      setWPMValue(value) {
+        const { test } = get();
+        set({
+          test: {
+            ...test,
+            wpm: value,
+          },
+        });
+      },
       setText(text) {
         const { test } = get();
         set({

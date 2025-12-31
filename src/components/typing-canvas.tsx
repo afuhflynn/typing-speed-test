@@ -60,7 +60,7 @@ export const TypingCanvas = () => {
       {text && text.trim() && <Overlay />}
 
       <span
-        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-14`}
+        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-14 transition-all duration-100`}
       >
         <RenderChars input={input} text={text} />
       </span>

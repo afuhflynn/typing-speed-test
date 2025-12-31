@@ -18,6 +18,8 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     setCharsValue,
     personalBest,
     setTestFlags,
+    setTypingState,
+    setPersonalBest,
   } = useTypingStore();
 
   // Timer values
@@ -47,14 +49,25 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
 
   const handleNavigate = useCallback(
     (route: string = "/result") => {
-      if (personalBest.wpm < wpm) {
+      if (!personalBest.wpm) {
+        setTestFlags(true);
+        setPersonalBest(0);
+      } else if (personalBest.wpm < wpm) {
         setTestFlags(false, true);
+        setPersonalBest(wpm);
       }
-      setTestFlags(true);
 
+      setTypingState("COMPLETE");
       navigate(route);
     },
-    [navigate, personalBest.wpm, setTestFlags, wpm]
+    [
+      navigate,
+      personalBest.wpm,
+      setTestFlags,
+      wpm,
+      setTypingState,
+      setPersonalBest,
+    ]
   );
 
   useEffect(() => {

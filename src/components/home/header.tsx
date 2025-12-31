@@ -23,7 +23,7 @@ export const Header = () => {
             <span className="hidden md:flex">Personal best:</span>{" "}
             <span className="flex md:hidden">Best:</span>{" "}
           </span>
-          <span className="text-xl">{personalBest?.wpm} WPM</span>
+          <span className="text-xl">{personalBest?.wpm ?? 0} WPM</span>
         </div>
       </div>
     </header>

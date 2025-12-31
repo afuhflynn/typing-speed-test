@@ -11,7 +11,6 @@ interface TestState {
   chars: number;
   mode: Mode;
   difficulty: Difficulty;
-  prevWords: string;
 }
 
 type TypingState = "TYPING" | "PAUSED" | "NEW";
@@ -20,11 +19,6 @@ interface Timer {
   h?: number; // hours
   m: number; // minutes
   s: number; // seconds
-}
-
-interface SettingsState {
-  mode: Mode;
-  difficulty: Difficulty;
 }
 
 interface PersonalBestState {
@@ -39,7 +33,6 @@ interface ResultsState {
 
 interface StoreState {
   test: TestState;
-  settings: SettingsState;
   personalBest: PersonalBestState;
   typingState: TypingState;
   setTypingState: (typingState: TypingState) => void;
@@ -49,10 +42,10 @@ interface StoreState {
   setTimerValue: (key: string, value: number) => void;
   setText: (text: string) => void;
   setInput: (input: string) => void;
-  setPrevWords: (value: string) => void;
   restartTyping: () => void;
   setWPMValue: (value: number) => void;
   setAccuracyValue: (value: number) => void;
   setCharsValue: (value: number) => void;
   setErrorsValue: (value: number) => void;
+  resetTest: () => void;
 }

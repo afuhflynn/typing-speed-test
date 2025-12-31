@@ -6,7 +6,7 @@ interface props {
 }
 
 export const ResultsComponenet = ({ status }: props) => {
-  const { test } = useTypingStore();
+  const { test, resetTest } = useTypingStore();
   const { wpm, accuracy, chars, errors } = test;
   return (
     <div className="flex flex-col items-center w-full md:gap-12 gap-10 relative flex-1">
@@ -61,7 +61,7 @@ export const ResultsComponenet = ({ status }: props) => {
       <Link to="/" className="decoration-0">
         <button
           className="font-semibold py-5 px-6 rounded-[12px] text-neutral-900 bg-neutral-0 text-xl hover:bg-neutral-0/80 transition-colors duration-75 flex items-center gap-4 md:mt-8! mt-2!"
-          // onClick={restartTyping}
+          onClick={resetTest}
         >
           <span>{status !== "RESULTS" ? "Beat This Score" : "Go Again"}</span>
           <img

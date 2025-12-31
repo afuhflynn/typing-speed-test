@@ -7,7 +7,6 @@ export const useTypingStore = create<StoreState>()(
       test: {
         text: "",
         input: "",
-        prevWords: "",
 
         timer: {
           m: 0,
@@ -20,10 +19,7 @@ export const useTypingStore = create<StoreState>()(
         mode: "TIMED",
         difficulty: "HARD",
       },
-      settings: {
-        mode: "TIMED",
-        difficulty: "HARD",
-      },
+
       personalBest: {
         wpm: 0,
       },
@@ -32,12 +28,21 @@ export const useTypingStore = create<StoreState>()(
         accuracy: 0,
         chars: 0,
       },
-      setPrevWords(value) {
-        const { test } = get();
+      resetTest() {
         set({
           test: {
-            ...test,
-            prevWords: value,
+            input: "",
+            timer: {
+              m: 0,
+              s: 0,
+            },
+            wpm: 0,
+            accuracy: 0,
+            errors: 0,
+            chars: 0,
+            mode: "TIMED",
+            difficulty: "HARD",
+            text: "",
           },
         });
       },
@@ -150,7 +155,6 @@ export const useTypingStore = create<StoreState>()(
           test: {
             ...test,
             input: "",
-            prevWords: "",
             timer: {
               m: 0,
               s: 0,

@@ -16,13 +16,15 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     setAccuracyValue,
     setErrorsValue,
     setCharsValue,
+    personalBest,
+    setTestFlags,
   } = useTypingStore();
 
   // Timer values
   const { m, h, s } = timer;
 
   // Typing input and reference text
-  const { input, text, mode } = test;
+  const { input, text, mode, wpm } = test;
 
   // Calculates accuracy, error count, and correct characters
   const calculateAccuracy = useCallback(() => {
@@ -45,9 +47,14 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
 
   const handleNavigate = useCallback(
     (route: string = "/result") => {
+      if (personalBest.wpm < wpm) {
+        setTestFlags(false, true);
+      }
+      setTestFlags(true);
+
       navigate(route);
     },
-    [navigate]
+    [navigate, personalBest.wpm, setTestFlags, wpm]
   );
 
   useEffect(() => {

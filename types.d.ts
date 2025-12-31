@@ -24,7 +24,7 @@ interface Timer {
 }
 
 interface PersonalBestState {
-  wpm: number;
+  wpm?: number;
 }
 
 interface StoreState {

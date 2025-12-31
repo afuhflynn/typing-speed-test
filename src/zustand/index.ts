@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const initialTestState = {
-  text: "",
   input: "",
 
   timer: {
@@ -22,11 +21,9 @@ const initialTestState = {
 export const useTypingStore = create<StoreState>()(
   persist(
     (set, get) => ({
-      test: initialTestState,
+      test: { ...initialTestState, text: "" },
 
-      personalBest: {
-        wpm: 0,
-      },
+      personalBest: {},
       setPersonalBest(value) {
         set({
           personalBest: {
@@ -45,8 +42,10 @@ export const useTypingStore = create<StoreState>()(
         });
       },
       resetTest() {
+        const { test } = get();
+        const { text } = test;
         set({
-          test: initialTestState,
+          test: { ...initialTestState, text },
         });
       },
 

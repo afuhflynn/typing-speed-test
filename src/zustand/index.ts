@@ -101,6 +101,15 @@ export const useTypingStore = create<StoreState>()(
       },
       setInput(input) {
         const { test } = get();
+        // If input is shorter than the test text, reset the test
+        if (input.length <= test.text.length) {
+          set({
+            test: {
+              ...test,
+            },
+          });
+          return;
+        }
         set({
           test: {
             ...test,

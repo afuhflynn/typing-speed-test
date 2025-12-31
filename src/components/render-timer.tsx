@@ -2,7 +2,10 @@ import { useCallback, useEffect, useRef } from "react";
 import { useTypingStore } from "../zustand";
 
 export const RenderTimer = ({ timer }: { timer: Timer }) => {
+  // Stores the timestamp when typing starts (used for WPM)
   const startTimeRef = useRef<number>(0);
+
+  // Zustand state and setters
   const {
     typingState,
     setTimerValue,
@@ -12,9 +15,14 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     setErrorsValue,
     setCharsValue,
   } = useTypingStore();
+
+  // Timer values
   const { m, h, s } = timer;
+
+  // Typing input and reference text
   const { input, text } = test;
 
+  // Calculates accuracy, error count, and correct characters
   const calculateAccuracy = useCallback(() => {
     if (input.length === 0) {
       return { errorCount: 0, accuracy: 0, correctChars: 0 };
@@ -28,20 +36,21 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     }
 
     const correctChars = charsToCheck - errorCount;
-    // Calculate accuracy based on characters typed so far
     const accuracy = Math.round((correctChars / charsToCheck) * 100);
 
     return { errorCount, accuracy, correctChars };
   }, [input, text]);
 
   useEffect(() => {
+    // Run timer logic every second
     const timerInterval = setTimeout(() => {
+      // Stop timer logic if not typing
       if (typingState !== "TYPING") {
         startTimeRef.current = 0;
         return;
       }
 
-      // Set start time on first tick when typing
+      // Set start time on first typing tick
       if (startTimeRef.current === 0) {
         startTimeRef.current = Date.now();
       }
@@ -49,38 +58,45 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
       if (s < 59) {
         setTimerValue("s", s + 1);
 
-        // Calculate accuracy every second
+        // Update accuracy-related stats
         const { errorCount, accuracy, correctChars } = calculateAccuracy();
+
         setAccuracyValue(accuracy);
         setErrorsValue(errorCount);
         setCharsValue(correctChars);
 
-        // Calculate WPM every second if we have a start time
+        // Calculate WPM
         if (startTimeRef.current > 0 && input.length > 0) {
           const currentTime = Date.now();
           const timeTakenInMinutes =
             (currentTime - startTimeRef.current) / 60000;
+
           const wordCount = input
             .trim()
             .split(/\s+/)
             .filter((word) => word.length > 0).length;
+
           const wpm =
             timeTakenInMinutes > 0
               ? Math.round(wordCount / timeTakenInMinutes)
               : 0;
+
           setWPMValue(wpm);
         }
       } else if (s === 59) {
+        // Seconds → minutes rollover
         setTimerValue("s", 0);
         setTimerValue("m", m + 1);
       }
 
+      // Minutes → hours rollover
       if (m === 59 && s === 59) {
         setTimerValue("s", 0);
         setTimerValue("m", 0);
         setTimerValue("h", (h ?? 0) + 1);
       }
 
+      // Reset after 24 hours
       if (h === 23 && m === 59 && s === 59) {
         setTimerValue("s", 0);
         setTimerValue("m", 0);
@@ -105,6 +121,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     setErrorsValue,
   ]);
 
+  // Render hh:mm:ss if hours exist
   if (h) {
     return (
       <span
@@ -117,6 +134,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     );
   }
 
+  // Default render mm:ss
   return (
     <span
       className={`flex items-center font-extrabold ${

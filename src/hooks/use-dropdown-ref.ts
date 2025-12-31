@@ -6,13 +6,14 @@ export const useDropdownRef = (
 ) => {
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
-      if (ref && ref.current) {
-        if (ref.current.contains(e.target)) {
-          // TODO: Fix this ts error
-          callback();
-        }
+      // runtime check ensures TypeScript and runtime agree
+      if (!(e.target instanceof Node)) return;
+
+      if (ref.current && ref.current.contains(e.target)) {
+        callback();
       }
     };
+
     document.documentElement.addEventListener("click", handleClick);
 
     return () => {

@@ -5,7 +5,7 @@ import { FooterSection } from "../components/footer";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col h-full w-full padding gap-8 overflow-x-hidden">
+    <div className="flex flex-col h-full w-full padding gap-8 overflow-auto overflow-x-hidden">
       <section className="w-full flex flex-col lg:gap-16 gap-8">
         <Header />
         <AppUtils />

@@ -123,8 +123,9 @@ export const useTypingStore = create<StoreState>()(
     {
       name: "typing-speed-test",
       partialize: (state) => {
+        // @ts-expect-error: I don't want to do anything with this valud
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { settings, personalBest, results, typingState } = state;
-        console.log({ typingState });
         return { settings, personalBest, results };
       },
     }

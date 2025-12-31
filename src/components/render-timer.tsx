@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTypingStore } from "../zustand";
 
 export const RenderTimer = ({ timer }: { timer: Timer }) => {
@@ -15,7 +15,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
   const { m, h, s } = timer;
   const { input, text } = test;
 
-  const calculateAccuracy = () => {
+  const calculateAccuracy = useCallback(() => {
     let errorCount = 0;
 
     for (let i = 0; i < input.length; i++) {
@@ -26,7 +26,7 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     const accuracy = Math.round(correctChars / text.length / 100); // calculate percentage accuracy
 
     return { errorCount, accuracy, correctChars };
-  };
+  }, [input, text]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -65,7 +65,20 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [typingState, s, setTimerValue, h, m, input, setWPMValue, startTime]);
+  }, [
+    typingState,
+    s,
+    setTimerValue,
+    h,
+    m,
+    input,
+    setWPMValue,
+    startTime,
+    calculateAccuracy,
+    setAccuracyValue,
+    setCharsValue,
+    setErrorsValue,
+  ]);
   if (h) {
     return (
       <span

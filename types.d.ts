@@ -25,18 +25,11 @@ interface PersonalBestState {
   wpm: number;
 }
 
-interface ResultsState {
-  wpm: number;
-  accuracy: number;
-  chars: number;
-}
-
 interface StoreState {
   test: TestState;
   personalBest: PersonalBestState;
   typingState: TypingState;
   setTypingState: (typingState: TypingState) => void;
-  results: ResultsState;
   setDifficulty: (difficulty: Difficulty) => void;
   setMode: (mode: Mode) => void;
   setTimerValue: (key: string, value: number) => void;

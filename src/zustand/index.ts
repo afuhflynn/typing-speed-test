@@ -23,11 +23,6 @@ export const useTypingStore = create<StoreState>()(
       personalBest: {
         wpm: 0,
       },
-      results: {
-        wpm: 0,
-        accuracy: 0,
-        chars: 0,
-      },
       resetTest() {
         set({
           test: {

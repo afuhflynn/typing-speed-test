@@ -13,7 +13,7 @@ interface TestState {
   difficulty: Difficulty;
 }
 
-type TypingState = "TYPING" | "PAUSED" | "NEW";
+type TypingState = "TYPING" | "PAUSED" | "NEW" | "COMPLETE";
 
 interface Timer {
   h?: number; // hours

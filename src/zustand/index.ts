@@ -98,7 +98,27 @@ export const useTypingStore = create<StoreState>()(
         });
       },
 
-      restartTyping() {},
+      restartTyping() {
+        const { test } = get();
+
+        set({
+          test: {
+            ...test,
+            input: "",
+            prevWords: "",
+            timer: {
+              m: 0,
+              s: 0,
+            },
+            wpm: 0,
+            accuracy: 0,
+            errors: 0,
+            chars: 0,
+            mode: "TIMED",
+            difficulty: "HARD",
+          },
+        });
+      },
     }),
     {
       name: "typing-speed-test",

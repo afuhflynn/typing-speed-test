@@ -124,7 +124,8 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
           setWPMValue(wpm);
         }
       } else if (s === 59) {
-        if (mode === "TIMED") handleNavigate();
+        if (mode === "TIMED" || input.trim().length >= text.trim().length)
+          handleNavigate();
 
         // Seconds → minutes rollover
         setTimerValue("s", 0);

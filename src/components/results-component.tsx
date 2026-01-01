@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTypingStore } from "../zustand";
+import NumberFlow from "@number-flow/react";
 
 interface props {
   status: "NEW_PERSONAL_BEST" | "FIRST_TEST" | "RESULTS";
@@ -8,6 +9,7 @@ interface props {
 export const ResultsComponenet = ({ status }: props) => {
   const { test, resetTest, setTypingState } = useTypingStore();
   const { wpm, accuracy, chars, errors } = test;
+
   return (
     <div className="flex flex-col items-center w-full md:gap-12 gap-10 relative flex-1">
       {status !== "NEW_PERSONAL_BEST" ? (
@@ -39,7 +41,9 @@ export const ResultsComponenet = ({ status }: props) => {
         <div className="border rounded-[8px] p-6 border-neutral-700 md:w-1/3! lg:w-70! w-full!">
           <h2 className="flex flex-col items-start gap-3 text-3xl! font-light!">
             <span className="text-neutral-500">WPM: </span>
-            <span className="font-extrabold">{wpm}</span>
+            <span className="font-extrabold">
+              <NumberFlow format={{ notation: "compact" }} value={wpm} />
+            </span>
           </h2>
         </div>
         <div className="border rounded-[8px] p-6 border-neutral-700 md:w-1/3! lg:w-70! w-full!">

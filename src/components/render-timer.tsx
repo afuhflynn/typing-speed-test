@@ -104,25 +104,11 @@ export const RenderTimer = ({ timer }: { timer: Timer }) => {
             ? Math.round(wordCount / timeTakenInMinutes)
             : 0;
 
-        setWPMValue(wpmCalc);
+        setWPMValue(wpm);
       }
     } else if (s === 59) {
-      if (mode === "TIMED") {
-        if (!personalBest.wpm) {
-          setTestFlags(true);
-          setPersonalBest(wpm);
-        } else if (personalBest.wpm < wpm) {
-          setTestFlags(false, true);
-          setPersonalBest(wpm);
-        }
-        setTypingState("COMPLETE");
-        navigate("/result");
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-        }
-        return;
-      }
+      if (mode === "TIMED" || input.trim().length >= text.trim().length)
+        handleNavigate();
 
       // Seconds → minutes rollover
       setTimerValue("s", 0);

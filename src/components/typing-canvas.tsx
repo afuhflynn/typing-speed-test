@@ -27,7 +27,7 @@ const RenderChars = ({ input, text }: { input: string; text: string }) => {
             key={i}
             className={`${className} ${showCaret ? "caret-highlight" : ""}`}
           >
-            {char}
+            {input[i] && input[i] !== char ? input[i] : char}
           </span>
         );
       })}
@@ -62,22 +62,22 @@ export const TypingCanvas = () => {
   }, [typingState]);
 
   return (
-    <div className="relative w-full flex-1 py-0">
+    <div className="relative w-full flex-1 py-0 overflow-hidden">
       {text && text.trim() && <Overlay />}
 
       <span
-        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100`}
+        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 relative w-full overflow-hidden`}
       >
         <RenderChars input={input} text={text} />
+        <textarea
+          ref={inputRef}
+          spellCheck={false}
+          className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 caret-transparent"
+          autoFocus
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
       </span>
-      <textarea
-        ref={inputRef}
-        spellCheck={false}
-        className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 caret-transparent"
-        autoFocus
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
     </div>
   );
 };

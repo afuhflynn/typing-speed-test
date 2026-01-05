@@ -66,18 +66,18 @@ export const TypingCanvas = () => {
       {text && text.trim() && <Overlay />}
 
       <span
-        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 relative w-full overflow-hidden`}
+        className={` lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 relative w-full h-auto`}
       >
         <RenderChars input={input} text={text} />
-        <textarea
-          ref={inputRef}
-          spellCheck={false}
-          className="absolute h-full w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 caret-transparent"
-          autoFocus
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
       </span>
+      <textarea
+        ref={inputRef}
+        spellCheck={false}
+        className="absolute h-auto w-full z-10 resize-none bg-transparent border-none outline-none focus-visible:outline-none top-0 bottom-0 left-0 text-transparent lg:text-5xl md:text-3xl md::text-[40px] text-[32px] leading-18 transition-all duration-100 caret-transparent"
+        autoFocus
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
     </div>
   );
 };

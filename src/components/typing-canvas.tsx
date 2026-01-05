@@ -62,7 +62,7 @@ export const TypingCanvas = () => {
   }, [typingState]);
 
   return (
-    <div className="relative w-full flex-1 py-0 overflow-hidden overflow-y-auto">
+    <div className="relative w-full flex-1 py-0 overflow-hidden">
       {text && text.trim() && <Overlay />}
 
       <span
